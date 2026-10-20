@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>收入结构 ≠ 利润结构：一家"双主业"公司的账实之差｜作品集</title>
+<style>
+  :root{
+    --ink:#1a2332; --ink-2:#4a5568; --ink-3:#7a8699;
+    --line:#e4e8ee; --bg:#fbfcfd; --card:#fff;
+    --accent:#1f5c8b; --accent-soft:#eef4f9;
+    --warn:#8a6d00; --warn-bg:#fdfaf0; --warn-line:#c9a227;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    font-size:16px; line-height:1.75;
+  }
+  .wrap{max-width:820px; margin:0 auto; padding:0 20px}
+  a{color:var(--accent)}
+
+  /* back link */
+  .back{display:inline-block; margin:18px 0 0; font-size:13.5px; color:var(--ink-3); text-decoration:none}
+  .back:hover{color:var(--accent)}
+
+  header{background:linear-gradient(160deg,#1f5c8b 0%,#15405f 100%); color:#fff; padding:44px 0 40px; margin-bottom:34px}
+  header .eyebrow{font-size:13px; letter-spacing:.16em; text-transform:uppercase; opacity:.75; margin-bottom:14px}
+  header h1{font-size:28px; line-height:1.35; margin:0 0 16px; font-weight:700}
+  header .lede{font-size:15.5px; line-height:1.8; color:#fff; opacity:.94; margin:0; max-width:650px}
+  .meta{margin-top:24px; display:flex; flex-wrap:wrap; gap:10px}
+  .meta span{font-size:13px; padding:5px 13px; border-radius:20px; background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.2)}
+
+  section{margin-bottom:40px}
+  h2{font-size:20px; font-weight:700; margin:0 0 18px; padding-bottom:10px; border-bottom:2px solid var(--accent); display:flex; align-items:baseline; gap:11px}
+  h2 .no{font-size:13px; font-weight:700; color:#fff; background:var(--accent); width:24px; height:24px; border-radius:6px; display:inline-flex; align-items:center; justify-content:center; flex:0 0 auto; transform:translateY(-1px)}
+  h3{font-size:16px; font-weight:700; margin:26px 0 10px}
+  p{margin:0 0 14px; color:var(--ink-2)}
+  strong{color:var(--ink); font-weight:700}
+
+  .card{background:var(--card); border:1px solid var(--line); border-radius:10px; padding:20px 22px; margin-bottom:16px}
+  .card.accent{background:var(--accent-soft); border-color:#d3e2ee}
+  .card h4{margin:0 0 10px; font-size:15.5px; color:var(--accent); font-weight:700}
+  .card p:last-child{margin-bottom:0}
+
+  .stats{display:flex; flex-wrap:wrap; gap:12px; margin:20px 0}
+  .stat{flex:1 1 155px; background:var(--card); border:1px solid var(--line); border-left:3px solid var(--accent); border-radius:8px; padding:14px 16px}
+  .stat .v{font-size:21px; font-weight:700; color:var(--accent); line-height:1.3; letter-spacing:-.02em}
+  .stat .v small{font-size:13px; font-weight:600}
+  .stat .k{font-size:12.5px; color:var(--ink-3); margin-top:4px; line-height:1.5}
+
+  .tbl-scroll{overflow-x:auto; -webkit-overflow-scrolling:touch; margin:18px 0; border:1px solid var(--line); border-radius:10px; background:var(--card)}
+  table{border-collapse:collapse; width:100%; min-width:560px; font-size:14.5px}
+  th,td{padding:11px 14px; text-align:left; border-bottom:1px solid var(--line); vertical-align:top}
+  th{background:#f4f7fa; font-weight:700; font-size:13.5px; white-space:nowrap}
+  tr:last-child td{border-bottom:none}
+  td.num{font-variant-numeric:tabular-nums; white-space:nowrap; font-weight:700; color:var(--accent)}
+  .dim{color:var(--ink-3); font-size:13.5px}
+  .neg{color:#b03a3a; font-weight:700}
+
+  /* bars */
+  .bars{margin:20px 0; background:var(--card); border:1px solid var(--line); border-radius:10px; padding:20px 22px}
+  .bar-row{display:flex; align-items:center; gap:12px; margin-bottom:13px}
+  .bar-row:last-child{margin-bottom:0}
+  .bar-row .nm{flex:0 0 82px; font-size:13.5px; font-weight:700; color:var(--ink)}
+  .bar-row .track{flex:1; height:22px; background:#f0f3f7; border-radius:4px; overflow:hidden}
+  .bar-row .fill{height:100%; border-radius:4px; background:var(--accent)}
+  .bar-row .fill.alt{background:#7fa8c6}
+  .bar-row .vl{flex:0 0 62px; text-align:right; font-size:13px; font-weight:700; color:var(--accent); font-variant-numeric:tabular-nums}
+
+  /* composition comparison */
+  .comp{margin:20px 0; background:var(--card); border:1px solid var(--line); border-radius:10px; padding:22px 22px 16px}
+  .comp .grp{margin-bottom:20px}
+  .comp .grp:last-of-type{margin-bottom:0}
+  .comp .gl{font-size:13.5px; font-weight:700; color:var(--ink); margin-bottom:8px}
+  .comp .gl span{font-weight:400; color:var(--ink-3); font-size:12.5px}
+  .stack{display:flex; height:38px; border-radius:6px; overflow:hidden; border:1px solid #e0e6ec}
+  .seg{display:flex; align-items:center; justify-content:center; color:#fff; font-size:12.5px; font-weight:700; font-variant-numeric:tabular-nums; white-space:nowrap; overflow:hidden}
+  .seg.s1{background:#1f5c8b}
+  .seg.s2{background:#7aa87a}
+  .seg.s3{background:#c9a227; color:#5a4700}
+  .comp .note{font-size:12.5px; color:var(--ink-3); margin-top:14px; padding-top:12px; border-top:1px solid var(--line)}
+  .comp .note b{color:#b03a3a}
+
+  /* chart */
+  .chart{background:var(--card); border:1px solid var(--line); border-radius:10px; padding:20px 20px 14px; margin:20px 0}
+  .chart .cap{font-size:13.5px; font-weight:700; color:var(--ink); margin-bottom:2px}
+  .chart .sub{font-size:12.5px; color:var(--ink-3); margin-bottom:14px}
+  .chart svg{display:block; width:100%; height:auto}
+  .legend{display:flex; flex-wrap:wrap; gap:16px; margin-top:12px; padding-top:11px; border-top:1px solid var(--line); font-size:12.5px; color:var(--ink-2)}
+  .legend i{display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:5px; vertical-align:middle}
+  .src{font-size:12px; color:var(--ink-3); margin-top:9px}
+
+  ul{margin:0 0 14px; padding-left:20px}
+  li{margin-bottom:9px; color:var(--ink-2)}
+  .rules{counter-reset:r; list-style:none; padding:0}
+  .rules li{counter-increment:r; position:relative; padding:12px 16px 12px 46px; margin-bottom:9px; background:var(--card); border:1px solid var(--line); border-radius:8px; color:var(--ink)}
+  .rules li::before{content:counter(r); position:absolute; left:14px; top:11px; width:22px; height:22px; border-radius:50%; background:var(--accent); color:#fff; font-size:12.5px; font-weight:700; display:flex; align-items:center; justify-content:center}
+
+  .callout{border-left:3px solid var(--warn-line); background:var(--warn-bg); padding:15px 18px; border-radius:0 8px 8px 0; margin:18px 0}
+  .callout .t{font-weight:700; color:var(--warn); font-size:14px; margin-bottom:6px}
+  .callout p{font-size:14.5px; margin-bottom:0; color:#5c4f22}
+
+  footer{border-top:1px solid var(--line); margin-top:30px; padding:26px 0 50px; font-size:13.5px; color:var(--ink-3)}
+  footer p{margin:0 0 6px; font-size:13.5px; color:var(--ink-3)}
+
+  @media (max-width:600px){
+    body{font-size:15px}
+    header{padding:34px 0 30px}
+    header h1{font-size:22px}
+    h2{font-size:18px}
+    .stats .stat{flex:1 1 44%}
+    .bar-row{gap:9px}
+    .bar-row .nm{flex:0 0 62px; font-size:12.5px}
+    .bar-row .vl{flex:0 0 54px; font-size:12px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow">深度拆解 · 业务结构</div>
+    <h1>收入结构 ≠ 利润结构：一家"双主业"公司的账实之差</h1>
+    <p class="lede">
+      "双主业"是公司常用的业务描述，但它描述的是收入构成，不是利润来源。
+      本文以一家同时经营收费公路与环保业务的公司为例，把收入与成本拆到板块层面、分别测算利润贡献，
+      验证业务描述与真实盈利结构之间是否存在落差，并追溯利润波动的具体来源。
+    </p>
+    <div class="meta">
+      <span>业务结构拆解</span>
+      <span>分板块利润测算</span>
+      <span>利润波动归因</span>
+      <span>结论后续回测</span>
+      <span>2025.03 – 2025.04</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <a class="back" href="index.html">← 返回作品集目录</a>
+
+  <section style="margin-top:26px">
+    <h2><span class="no">1</span>问题定义</h2>
+    <p>
+      这家公司在业务描述上同时拥有"收费公路"与"大环保"两条业务线，从表面看是均衡的"双主业"结构。
+      但业务描述回答不了三个问题：
+    </p>
+    <ul>
+      <li>两条业务线对公司<strong>收入和利润的实际贡献各占多少</strong>？</li>
+      <li>公司近年<strong>营收与利润的波动，主要来自哪一条业务线</strong>？</li>
+      <li>如果其中一条业务线承压，公司的<strong>盈利韧性</strong>如何？</li>
+    </ul>
+    <div class="callout">
+      <div class="t">我在这个问题上的判断</div>
+      <p>
+        "双主业"往往是财报叙事，不一定是利润结构。要判断真实驱动，必须<strong>把收入、成本、毛利拆到板块层面</strong>，
+        并且用<strong>毛利贡献占比</strong>而不是收入占比来衡量——因为两条业务线的毛利率可能相差数倍，
+        收入占比会严重误导判断。
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="no">2</span>拆解方法</h2>
+
+    <h3>三层拆解路径</h3>
+    <ol class="rules">
+      <li><strong>收入拆解：</strong>把营业总收入按业务板块拆分，得到收费公路、大环保、其他业务三条线的收入规模与同比变化；</li>
+      <li><strong>成本与毛利拆解：</strong>对应拆分营业成本，计算各板块毛利润与毛利率，识别各板块的盈利能力差异；</li>
+      <li><strong>利润归集：</strong>在毛利基础上叠加费用、投资收益、资产减值等项目，测算是哪一块的变化导致了归母净利润的波动。</li>
+    </ol>
+
+    <h3>数据建模</h3>
+    <p>
+      在拆解基础上搭建估值与盈利预测模型（<strong>481 行</strong>、多业务板块拆分），
+      覆盖 <strong>2016–2024 历史数据</strong>与预测期，以<strong>增长率、毛利率等假设驱动</strong>。
+    </p>
+    <p>
+      收费公路板块进一步按<strong>车流量、通行费收入、单次平均通行费</strong>三个口径逐路拆分，
+      使"收入变化"可以被追溯到底是<strong>量</strong>（车流量）还是<strong>价</strong>（单车收入）的变化。
+    </p>
+    <div class="callout">
+      <div class="t">为什么要在板块之下再拆一层</div>
+      <p>
+        只看板块层面的收入增减，无法判断问题性质。把通行费收入拆成"车流量 × 单次平均通行费"之后，
+        收入下滑就能被区分为<strong>需求问题</strong>（车流减少）还是<strong>定价问题</strong>（单车收入下降）——
+        这两种情况的应对完全不同。
+      </p>
+    </div>
+
+    <h3>量价拆解示例：三条代表性高速</h3>
+    <p>把 2024 年三条代表性路段的通行费收入、日均车流量与单次平均通行费放在一起看：</p>
+
+    <div class="tbl-scroll">
+      <table>
+        <thead>
+          <tr><th>路段</th><th>通行费收入<br>（万元）</th><th>日均车流量<br>（千辆次）</th><th>单次平均<br>通行费（元）</th><th>收入同比</th><th>量 / 价 变化</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>广深高速</strong><span class="dim">（未并表）</span></td>
+            <td class="num">271,175</td>
+            <td class="num">632</td>
+            <td class="num dim">—</td>
+            <td class="num neg">-6%</td>
+            <td class="dim">量持平，价小幅下行</td>
+          </tr>
+          <tr>
+            <td><strong>沿江项目</strong></td>
+            <td class="num">73,603</td>
+            <td class="num">205</td>
+            <td class="num">10.44</td>
+            <td class="num">+17%</td>
+            <td class="dim">量 +8%，价 +8%（双升）</td>
+          </tr>
+          <tr>
+            <td><strong>外环项目</strong></td>
+            <td class="num">116,974</td>
+            <td class="num">310</td>
+            <td class="num">10.97</td>
+            <td class="num neg">-2%</td>
+            <td class="dim">量 +1%，价 -3%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="dim" style="font-size:12.5px; margin-top:-6px">
+      注：通行费收入为未含税口径的经营数据；"单次平均通行费"按标准车型单次计费口径统计，
+      与"通行费收入 ÷ 总车流量"的平均值存在口径差异，故广深高速该项未填列。
+    </p>
+
+    <div class="chart">
+      <div class="cap">三条代表性高速的日均路费收入（2024）</div>
+      <div class="sub">单位：千元 / 日。同一板块内部，不同路段的单公里产出能力差异显著——收入变化需区分"量"与"价"两个来源。</div>
+      <svg viewBox="0 0 560 152" width="100%" role="img" aria-label="三条代表性高速的日均路费收入">
+        <g>
+          <line x1="92" y1="118" x2="546" y2="118" stroke="#e9edf2" stroke-width="1"></line>
+          <text x="84" y="121.5" text-anchor="end" font-size="10.5" fill="#98a4b3">0</text>
+          <line x1="92" y1="88" x2="546" y2="88" stroke="#e9edf2" stroke-width="1"></line>
+          <text x="84" y="91.5" text-anchor="end" font-size="10.5" fill="#98a4b3">3,000</text>
+          <line x1="92" y1="58" x2="546" y2="58" stroke="#e9edf2" stroke-width="1"></line>
+          <text x="84" y="61.5" text-anchor="end" font-size="10.5" fill="#98a4b3">6,000</text>
+          <line x1="92" y1="25.8" x2="546" y2="25.8" stroke="#e9edf2" stroke-width="1"></line>
+          <text x="84" y="29.3" text-anchor="end" font-size="10.5" fill="#98a4b3">9,000</text>
+          <line x1="92" y1="118" x2="546" y2="118" stroke="#cfd8e2" stroke-width="1"></line>
+          <text x="84" y="32" text-anchor="end" font-size="13" font-weight="700" fill="#1a2332">广深高速</text>
+          <rect x="92" y="25.8" width="454" height="16" fill="#1f5c8b" rx="2"></rect>
+          <text x="538" y="37.3" text-anchor="end" font-size="11.5" font-weight="700" fill="#fff">7,883</text>
+          <text x="84" y="74" text-anchor="end" font-size="13" font-weight="700" fill="#1a2332">外环项目</text>
+          <rect x="92" y="66" width="184.1" height="16" fill="#5b90b8" rx="2"></rect>
+          <text x="284" y="77.5" font-size="11.5" font-weight="700" fill="#1f5c8b">3,196</text>
+          <text x="84" y="104" text-anchor="end" font-size="13" font-weight="700" fill="#1a2332">沿江项目</text>
+          <rect x="92" y="96" width="115.8" height="16" fill="#8fb4d0" rx="2"></rect>
+          <text x="216" y="107.5" font-size="11.5" font-weight="700" fill="#1f5c8b">2,011</text>
+        </g>
+      </svg>
+      <div class="src">数据来源：公司年报及经营数据。日均路费收入 = 通行费收入 ÷ 该年自然天数</div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="no">3</span>拆解结果：收入结构</h2>
+    <p>2024 年营业总收入 <strong>92.45 亿元</strong>，各板块的收入与毛利贡献拆解如下（单位：百万元）：</p>
+
+    <div class="tbl-scroll">
+      <table>
+        <thead>
+          <tr><th>业务板块</th><th>2024 毛利润</th><th>毛利贡献占比</th><th>毛利率</th><th>毛利率趋势</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>收费公路</strong></td>
+            <td class="num">2,439.04</td>
+            <td class="num">83.5%</td>
+            <td class="num">48.3%</td>
+            <td class="dim">44%–53% 区间波动，长期稳定</td>
+          </tr>
+          <tr>
+            <td><strong>大环保</strong></td>
+            <td class="num">185.82</td>
+            <td class="num">6.4%</td>
+            <td class="num neg">13.2%</td>
+            <td class="dim">由 28.2% 逐年下滑至 13.2%</td>
+          </tr>
+          <tr>
+            <td><strong>其他业务</strong></td>
+            <td class="num">296.00</td>
+            <td class="num">10.1%</td>
+            <td class="num neg">3.2%</td>
+            <td class="dim">长期低于 5%</td>
+          </tr>
+          <tr>
+            <td><strong>合计</strong></td>
+            <td class="num">2,920.87</td>
+            <td class="num">100%</td>
+            <td class="num">31.6%</td>
+            <td class="dim">—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>收入结构 vs 利润结构</h3>
+    <p>把三块业务的收入占比与毛利贡献占比放在一起对比，结论会立刻显现（2024 年）：</p>
+
+    <div class="comp">
+      <div class="grp">
+        <div class="gl">收入结构 <span>营业总收入 9,245.27 百万元</span></div>
+        <div class="stack">
+          <div class="seg s1" style="width:54.7%">收费公路 54.7%</div>
+          <div class="seg s3" style="width:30.1%">其他 30.1%</div>
+          <div class="seg s2" style="width:15.2%">大环保 15.2%</div>
+        </div>
+        <div class="dim" style="font-size:12.5px; margin-top:7px">收费公路 5,052.91 ｜ 其他业务 2,783.32 ｜ 大环保 1,409.04（百万元）</div>
+      </div>
+      <div class="grp">
+        <div class="gl">毛利贡献结构 <span>合计毛利 2,920.87 百万元</span></div>
+        <div class="stack">
+          <div class="seg s1" style="width:83.5%">收费公路 83.5%</div>
+          <div class="seg s3" style="width:10.1%">其他 10.1%</div>
+          <div class="seg s2" style="width:6.4%">6.4%</div>
+        </div>
+        <div class="dim" style="font-size:12.5px; margin-top:7px">收费公路 2,439.04 ｜ 其他业务 296.00 ｜ 大环保 185.82（百万元）</div>
+      </div>
+      <div class="note">
+        收费公路的收入占比是 <b>54.7%</b>，毛利贡献占比却达到 <b>83.5%</b>；
+        大环保收入占比 <b>15.2%</b>，毛利贡献仅 <b>6.4%</b>。
+        <b>用收入看是"三块业务"，用利润看只有一块。</b>
+      </div>
+    </div>
+
+    <h3>大环保收入占比的变化：2020–2025H1</h3>
+    <p>
+      单看一年容易误判，把观察窗口拉长才能看清这块业务的真实位置。
+      （说明：2019 年及以前该公司分部收入披露口径不完整，为保证可比性，本图仅呈现 2020 年以来的区间。）
+    </p>
+
+    <div class="chart">
+      <div class="cap">各板块收入占比（2020 – 2025H1）</div>
+      <div class="sub">单位：%。大环保占比在 2020 年达到 31.4% 的峰值后回落，2025 年上半年回升至 19.1%。</div>
+      <svg viewBox="0 0 560 188" width="100%" role="img" aria-label="2020至2025年上半年各板块收入占比">
+        <g>
+          <line x1="40" y1="164.00" x2="546" y2="164.00" stroke="#cfd8e2" stroke-width="1"></line>
+          <text x="33" y="167.50" text-anchor="end" font-size="10" fill="#98a4b3">0%</text>
+          <line x1="40" y1="126.00" x2="546" y2="126.00" stroke="#e9edf2" stroke-width="1"></line>
+          <text x="33" y="129.50" text-anchor="end" font-size="10" fill="#98a4b3">25%</text>
+          <line x1="40" y1="88.00" x2="546" y2="88.00" stroke="#e9edf2" stroke-width="1"></line>
+          <text x="33" y="91.50" text-anchor="end" font-size="10" fill="#98a4b3">50%</text>
+          <line x1="40" y1="50.00" x2="546" y2="50.00" stroke="#e9edf2" stroke-width="1"></line>
+          <text x="33" y="53.50" text-anchor="end" font-size="10" fill="#98a4b3">75%</text>
+          <line x1="40" y1="12.00" x2="546" y2="12.00" stroke="#e9edf2" stroke-width="1"></line>
+          <text x="33" y="15.50" text-anchor="end" font-size="10" fill="#98a4b3">100%</text>
+          <rect x="56.87" y="80.93" width="50.60" height="83.07" fill="#1f5c8b"></rect>
+          <rect x="56.87" y="33.20" width="50.60" height="47.73" fill="#7aa87a"></rect>
+          <rect x="56.87" y="12.00" width="50.60" height="21.20" fill="#c9a227"></rect>
+          <rect x="141.20" y="81.75" width="50.60" height="82.25" fill="#1f5c8b"></rect>
+          <rect x="141.20" y="56.47" width="50.60" height="25.28" fill="#7aa87a"></rect>
+          <rect x="141.20" y="12.00" width="50.60" height="44.47" fill="#c9a227"></rect>
+          <rect x="225.53" y="83.26" width="50.60" height="80.74" fill="#1f5c8b"></rect>
+          <rect x="225.53" y="54.76" width="50.60" height="28.50" fill="#7aa87a"></rect>
+          <rect x="225.53" y="12.00" width="50.60" height="42.76" fill="#c9a227"></rect>
+          <rect x="309.87" y="76.11" width="50.60" height="87.89" fill="#1f5c8b"></rect>
+          <rect x="309.87" y="49.65" width="50.60" height="26.46" fill="#7aa87a"></rect>
+          <rect x="309.87" y="12.00" width="50.60" height="37.65" fill="#c9a227"></rect>
+          <rect x="394.20" y="80.93" width="50.60" height="83.07" fill="#1f5c8b"></rect>
+          <rect x="394.20" y="57.76" width="50.60" height="23.17" fill="#7aa87a"></rect>
+          <rect x="394.20" y="12.00" width="50.60" height="45.76" fill="#c9a227"></rect>
+          <rect x="478.53" y="68.99" width="50.60" height="95.01" fill="#1f5c8b"></rect>
+          <rect x="478.53" y="39.89" width="50.60" height="29.10" fill="#7aa87a"></rect>
+          <rect x="478.53" y="12.00" width="50.60" height="27.89" fill="#c9a227"></rect>
+          <text x="82.17" y="29.20" text-anchor="middle" font-size="9.5" font-weight="700" fill="#3f6b3f">31.4</text>
+          <text x="166.50" y="52.47" text-anchor="middle" font-size="9.5" font-weight="700" fill="#3f6b3f">16.6</text>
+          <text x="250.83" y="50.76" text-anchor="middle" font-size="9.5" font-weight="700" fill="#3f6b3f">18.7</text>
+          <text x="335.17" y="45.65" text-anchor="middle" font-size="9.5" font-weight="700" fill="#3f6b3f">17.4</text>
+          <text x="419.50" y="53.76" text-anchor="middle" font-size="9.5" font-weight="700" fill="#3f6b3f">15.2</text>
+          <text x="503.83" y="35.89" text-anchor="middle" font-size="9.5" font-weight="700" fill="#3f6b3f">19.1</text>
+          <text x="82.17" y="179" text-anchor="middle" font-size="10" fill="#98a4b3">2020</text>
+          <text x="166.50" y="179" text-anchor="middle" font-size="10" fill="#98a4b3">2021</text>
+          <text x="250.83" y="179" text-anchor="middle" font-size="10" fill="#98a4b3">2022</text>
+          <text x="335.17" y="179" text-anchor="middle" font-size="10" fill="#98a4b3">2023</text>
+          <text x="419.50" y="179" text-anchor="middle" font-size="10" fill="#98a4b3">2024</text>
+          <text x="503.83" y="179" text-anchor="middle" font-size="10" fill="#98a4b3">2025H1</text>
+        </g>
+      </svg>
+      <div class="legend">
+        <span><i style="background:#1f5c8b"></i>收费公路</span>
+        <span><i style="background:#7aa87a"></i>大环保</span>
+        <span><i style="background:#c9a227"></i>其他业务</span>
+      </div>
+      <div class="src">数据来源：公司年报及 2025 年半年度报告。2025H1 为该半年度的收入结构，与全年口径不可直接比较（环保业务存在季节性，且新增项目于年中所致）</div>
+    </div>
+
+    <div class="callout">
+      <div class="t">关于"双主业"的判断：占比回落 ≠ 战略放弃</div>
+      <p>
+        从收入占比看，大环保的相对份额确实在收缩：2020 年峰值 31.4% → 2024 年 15.2%，
+        同期"其他业务"从 13.9% 升至 30.1%，在收入口径上反超了大环保。
+        如果只看这一组数字，容易得出"第二主业失败"的结论。
+      </p>
+      <p style="margin-top:10px">
+        <strong>但把公司行为放进来，结论需要修正：公司仍在持续投入培育这条业务线。</strong>
+        具体证据有三：其一，2025 年上半年大环保收入 7.50 亿元，占比回升至 19.1%，
+        重新回到 2021–2023 年的水平区间；其二，占比回落的同时绝对额保持增长，
+        2025H1 餐厨垃圾处理收入同比 +26.2%，主要来自新项目投产——
+        <strong>说明这是"新增产能尚未贡献利润"，而不是"业务在萎缩"</strong>；
+        其三，公司计划到 2027 年底资本开支约 192 亿元，结构上仍包含环保项目的持续投入。
+      </p>
+      <p style="margin-top:10px">
+        <strong>因此更准确的判断是：公司确实在培育大环保作为第二主业，但这条业务线目前仍处于
+        "有收入、低毛利、盈利波动大"的阶段，尚未形成对利润的有效支撑。</strong>
+        这解释了为什么 2024 年环保板块的资产减值能够直接冲击归母净利润：
+        <strong>尚在培育期的业务出现减值，没有主业的利润体量来对冲。</strong>
+      </p>
+    </div>
+
+    <h3>毛利贡献 vs 毛利率的错位</h3>
+    <div class="bars">
+      <div class="bar-row">
+        <div class="nm">收费公路</div>
+        <div class="track"><div class="fill" style="width:83.5%"></div></div>
+        <div class="vl">83.5%</div>
+      </div>
+      <div class="bar-row">
+        <div class="nm">其他业务</div>
+        <div class="track"><div class="fill alt" style="width:10.1%"></div></div>
+        <div class="vl">10.1%</div>
+      </div>
+      <div class="bar-row">
+        <div class="nm">大环保</div>
+        <div class="track"><div class="fill alt" style="width:6.4%"></div></div>
+        <div class="vl">6.4%</div>
+      </div>
+    </div>
+    <p>
+      这是整个拆解里<strong>最关键的一个发现</strong>：大环保业务虽然被列为公司的第二条主业，
+      但其毛利贡献仅 <strong>6.4%</strong>，且毛利率从 2021 年的 28.1% 一路下滑至 2024 年的 <strong>13.2%</strong>。
+      与此同时，收费公路以不到一半的收入占比贡献了 <strong>83.5%</strong> 的毛利。
+    </p>
+
+    <div class="chart">
+      <div class="cap">大环保板块毛利率变化（2019–2024）</div>
+      <div class="sub">单位：%。该板块毛利率在六年间近乎腰斩，2024 年降至 13.2%，是拖累公司整体盈利能力的主要来源。</div>
+      <div class="bars">
+        <div class="bar-row">
+          <div class="nm">2019</div>
+          <div class="track"><div class="fill alt" style="width:88.1%"></div></div>
+          <div class="vl">28.2%</div>
+        </div>
+        <div class="bar-row">
+          <div class="nm">2020</div>
+          <div class="track"><div class="fill alt" style="width:59.6%"></div></div>
+          <div class="vl">19.1%</div>
+        </div>
+        <div class="bar-row">
+          <div class="nm">2021</div>
+          <div class="track"><div class="fill alt" style="width:83.8%"></div></div>
+          <div class="vl">26.8%</div>
+        </div>
+        <div class="bar-row">
+          <div class="nm">2022</div>
+          <div class="track"><div class="fill alt" style="width:90.4%"></div></div>
+          <div class="vl">28.9%</div>
+        </div>
+        <div class="bar-row">
+          <div class="nm">2023</div>
+          <div class="track"><div class="fill alt" style="width:70.1%"></div></div>
+          <div class="vl">22.4%</div>
+        </div>
+        <div class="bar-row">
+          <div class="nm">2024</div>
+          <div class="track"><div class="fill alt" style="width:41.2%"></div></div>
+          <div class="vl">13.2%</div>
+        </div>
+      </div>
+      <div class="src">数据来源：公司年报，按大环保板块毛利润 ÷ 板块营业收入计算</div>
+    </div>
+    <div class="callout">
+      <div class="t">结论：所谓"双主业"是收入结构上的，不是利润结构上的</div>
+      <p>
+        用<strong>收入占比</strong>看是双主业，用<strong>毛利贡献</strong>看是单主业。
+        这个区别决定了分析结论的方向——公司的盈利韧性取决于收费公路板块的车流与费率，
+        而不是环保业务的扩张速度。
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="no">4</span>拆解结果：利润波动归因</h2>
+    <p>把时间拉长看，这家公司的营收与归母净利润呈现出明显不同的走势：</p>
+
+    <div class="stats">
+      <div class="stat"><div class="v">92.45<small> 亿元</small></div><div class="k">2024 年营业总收入，同比基本持平</div></div>
+      <div class="stat"><div class="v">11.45<small> 亿元</small></div><div class="k">2024 年归母净利润，同比 <span style="color:#b03a3a">-50.8%</span></div></div>
+      <div class="stat"><div class="v">10.89<small> 亿元</small></div><div class="k">2021 年营收高点（同比 +35.7%）</div></div>
+      <div class="stat"><div class="v">34.39<small> 亿元</small></div><div class="k">2018 年归母净利高点</div></div>
+    </div>
+
+    <h3>关键归因链</h3>
+    <p>收入基本持平而归母净利润近乎腰斩，说明利润下滑<strong>不来自主营收入</strong>。继续往下拆，锁定两个来源：</p>
+
+    <div class="chart">
+      <div class="cap">2016–2024 年营业收入与归母净利润</div>
+      <div class="sub">单位：百万元。营收在 2021 年见顶后回落并趋稳，归母净利润则始终宽幅波动，2024 年降至近七年低点。</div>
+      <svg viewBox="0 0 560 262" width="100%" role="img" aria-label="2016至2024年营业收入与归母净利润">
+        <g>
+          <line x1="44" y1="222" x2="548" y2="222" stroke="#e9edf2" stroke-width="1"></line>
+          <text x="37" y="225.5" text-anchor="end" font-size="10.5" fill="#98a4b3">0</text>
+          <line x1="44" y1="169.1" x2="548" y2="169.1" stroke="#e9edf2" stroke-width="1"></line>
+          <text x="37" y="172.6" text-anchor="end" font-size="10.5" fill="#98a4b3">3,000</text>
+          <line x1="44" y1="116.2" x2="548" y2="116.2" stroke="#e9edf2" stroke-width="1"></line>
+          <text x="37" y="119.7" text-anchor="end" font-size="10.5" fill="#98a4b3">6,000</text>
+          <line x1="44" y1="63.3" x2="548" y2="63.3" stroke="#e9edf2" stroke-width="1"></line>
+          <text x="37" y="66.8" text-anchor="end" font-size="10.5" fill="#98a4b3">9,000</text>
+          <line x1="44" y1="222" x2="548" y2="222" stroke="#cfd8e2" stroke-width="1"></line>
+          <rect x="52.4" y="148" width="16.8" height="74.0" fill="#1f5c8b" rx="1.5"></rect>
+          <rect x="74.8" y="207.3" width="16.8" height="14.7" fill="#8fb4d0" rx="1.5"></rect>
+          <rect x="108.4" y="136.7" width="16.8" height="85.3" fill="#1f5c8b" rx="1.5"></rect>
+          <rect x="130.8" y="200.4" width="16.8" height="21.6" fill="#8fb4d0" rx="1.5"></rect>
+          <rect x="164.4" y="119.6" width="16.8" height="102.4" fill="#1f5c8b" rx="1.5"></rect>
+          <rect x="186.8" y="161.4" width="16.8" height="60.6" fill="#8fb4d0" rx="1.5"></rect>
+          <rect x="220.4" y="112.9" width="16.8" height="109.1" fill="#1f5c8b" rx="1.5"></rect>
+          <rect x="242.8" y="178.9" width="16.8" height="43.1" fill="#8fb4d0" rx="1.5"></rect>
+          <rect x="276.4" y="80.5" width="16.8" height="141.5" fill="#1f5c8b" rx="1.5"></rect>
+          <rect x="298.8" y="185.8" width="16.8" height="36.2" fill="#8fb4d0" rx="1.5"></rect>
+          <rect x="332.4" y="30" width="16.8" height="192.0" fill="#1f5c8b" rx="1.5"></rect>
+          <rect x="354.8" y="175.5" width="16.8" height="46.5" fill="#8fb4d0" rx="1.5"></rect>
+          <rect x="388.4" y="56.7" width="16.8" height="165.3" fill="#1f5c8b" rx="1.5"></rect>
+          <rect x="410.8" y="185.8" width="16.8" height="36.2" fill="#8fb4d0" rx="1.5"></rect>
+          <rect x="444.4" y="58.1" width="16.8" height="163.9" fill="#1f5c8b" rx="1.5"></rect>
+          <rect x="466.8" y="181" width="16.8" height="41.0" fill="#8fb4d0" rx="1.5"></rect>
+          <rect x="500.4" y="59" width="16.8" height="163.0" fill="#1f5c8b" rx="1.5"></rect>
+          <rect x="522.8" y="201.8" width="16.8" height="20.2" fill="#8fb4d0" rx="1.5"></rect>
+          <line x1="44" y1="89.1" x2="548" y2="89.1" stroke="#c9a227" stroke-width="1" stroke-dasharray="4 3"></line>
+          <text x="548" y="84.1" text-anchor="end" font-size="10" fill="#8a6d00">营收均值</text>
+          <text x="72.0" y="238" text-anchor="middle" font-size="10.5" fill="#98a4b3">16</text>
+          <text x="128.0" y="238" text-anchor="middle" font-size="10.5" fill="#98a4b3">17</text>
+          <text x="184.0" y="238" text-anchor="middle" font-size="10.5" fill="#98a4b3">18</text>
+          <text x="240.0" y="238" text-anchor="middle" font-size="10.5" fill="#98a4b3">19</text>
+          <text x="296.0" y="238" text-anchor="middle" font-size="10.5" fill="#98a4b3">20</text>
+          <text x="352.0" y="238" text-anchor="middle" font-size="10.5" fill="#98a4b3">21</text>
+          <text x="408.0" y="238" text-anchor="middle" font-size="10.5" fill="#98a4b3">22</text>
+          <text x="464.0" y="238" text-anchor="middle" font-size="10.5" fill="#98a4b3">23</text>
+          <text x="520.0" y="238" text-anchor="middle" font-size="10.5" fill="#98a4b3">24</text>
+        </g>
+      </svg>
+      <div class="legend">
+        <span><i style="background:#1f5c8b"></i>营业收入</span>
+        <span><i style="background:#8fb4d0"></i>归母净利润</span>
+        <span><i style="background:#c9a227"></i>营收均值（2016–2024）</span>
+      </div>
+      <div class="src">数据来源：公司年报，单位百万元</div>
+    </div>
+
+    <ul>
+      <li><strong>资产减值损失：</strong>2024 年全年计提资产减值 <strong>约 5.84 亿元</strong>，同比增加约 4.5 亿元，主要集中在环保业务的长期资产、存货与应收款项；</li>
+      <li><strong>投资收益下降：</strong>投资净收益约 <strong>10.25 亿元</strong>，同比减少约 1.8 亿元，主要来自参股项目联合置地商品房开发收益下降。</li>
+    </ul>
+    <p>
+      这两项都与<strong>环保业务及非主业资产</strong>相关，而不是收费公路主业——
+      这从<strong>利润端再次验证了前面的结论</strong>：公司盈利的稳定性锚定在收费公路，波动则来自环保板块的减值。
+    </p>
+
+    <div class="chart">
+      <div class="cap">2024 年从毛利到营业利润的构成路径</div>
+      <div class="sub">单位：百万元。毛利 2,921 经过各项费用与损益项目后，最终形成营业利润 1,795。柱形越高代表该项目金额越大。</div>
+      <svg viewBox="0 0 560 230" width="100%" role="img" aria-label="2024年从毛利到营业利润的构成路径">
+        <g>
+          <line x1="46" y1="182" x2="550" y2="182" stroke="#e9edf2" stroke-width="1"></line>
+          <text x="39" y="185.5" text-anchor="end" font-size="10.5" fill="#98a4b3">0</text>
+          <line x1="46" y1="131.3" x2="550" y2="131.3" stroke="#e9edf2" stroke-width="1"></line>
+          <text x="39" y="134.8" text-anchor="end" font-size="10.5" fill="#98a4b3">1,000</text>
+          <line x1="46" y1="80.7" x2="550" y2="80.7" stroke="#e9edf2" stroke-width="1"></line>
+          <text x="39" y="84.2" text-anchor="end" font-size="10.5" fill="#98a4b3">2,000</text>
+          <line x1="46" y1="30" x2="550" y2="30" stroke="#e9edf2" stroke-width="1"></line>
+          <text x="39" y="33.5" text-anchor="end" font-size="10.5" fill="#98a4b3">3,000</text>
+          <line x1="46" y1="182" x2="550" y2="182" stroke="#cfd8e2" stroke-width="1"></line>
+          <line x1="76.6" y1="34.0" x2="92.9" y2="34.0" stroke="#c3ced9" stroke-width="0.8" stroke-dasharray="2 2"></line>
+          <line x1="115.4" y1="37.0" x2="131.7" y2="37.0" stroke="#c3ced9" stroke-width="0.8" stroke-dasharray="2 2"></line>
+          <line x1="154.2" y1="37.6" x2="170.4" y2="37.6" stroke="#c3ced9" stroke-width="0.8" stroke-dasharray="2 2"></line>
+          <line x1="192.9" y1="39.3" x2="209.2" y2="39.3" stroke="#c3ced9" stroke-width="0.8" stroke-dasharray="2 2"></line>
+          <line x1="231.7" y1="62.6" x2="248.0" y2="62.6" stroke="#c3ced9" stroke-width="0.8" stroke-dasharray="2 2"></line>
+          <line x1="270.5" y1="115.2" x2="286.8" y2="115.2" stroke="#c3ced9" stroke-width="0.8" stroke-dasharray="2 2"></line>
+          <line x1="309.3" y1="134.7" x2="325.5" y2="134.7" stroke="#c3ced9" stroke-width="0.8" stroke-dasharray="2 2"></line>
+          <line x1="348.0" y1="144.8" x2="364.3" y2="144.8" stroke="#c3ced9" stroke-width="0.8" stroke-dasharray="2 2"></line>
+          <line x1="386.8" y1="144.6" x2="403.1" y2="144.6" stroke="#c3ced9" stroke-width="0.8" stroke-dasharray="2 2"></line>
+          <line x1="425.6" y1="92.7" x2="441.8" y2="92.7" stroke="#c3ced9" stroke-width="0.8" stroke-dasharray="2 2"></line>
+          <line x1="464.3" y1="92.3" x2="480.6" y2="92.3" stroke="#c3ced9" stroke-width="0.8" stroke-dasharray="2 2"></line>
+          <line x1="503.1" y1="91.1" x2="519.4" y2="91.1" stroke="#c3ced9" stroke-width="0.8" stroke-dasharray="2 2"></line>
+          <rect x="54.1" y="34" width="22.5" height="148" fill="#1f5c8b" rx="1.5"></rect>
+          <rect x="92.9" y="34" width="22.5" height="3" fill="#c98b8b" rx="1.5"></rect>
+          <rect x="131.7" y="37" width="22.5" height="0.8" fill="#c98b8b" rx="1.5"></rect>
+          <rect x="170.4" y="37.6" width="22.5" height="1.7" fill="#c98b8b" rx="1.5"></rect>
+          <rect x="209.2" y="39.3" width="22.5" height="23.3" fill="#c98b8b" rx="1.5"></rect>
+          <rect x="248" y="62.6" width="22.5" height="52.6" fill="#c98b8b" rx="1.5"></rect>
+          <rect x="286.8" y="115.2" width="22.5" height="19.5" fill="#c98b8b" rx="1.5"></rect>
+          <rect x="325.5" y="134.7" width="22.5" height="10.1" fill="#c98b8b" rx="1.5"></rect>
+          <rect x="364.3" y="144.6" width="22.5" height="0.8" fill="#7aa87a" rx="1.5"></rect>
+          <rect x="403.1" y="92.7" width="22.5" height="51.9" fill="#7aa87a" rx="1.5"></rect>
+          <rect x="441.8" y="92.3" width="22.5" height="0.8" fill="#7aa87a" rx="1.5"></rect>
+          <rect x="480.6" y="91.1" width="22.5" height="1.2" fill="#7aa87a" rx="1.5"></rect>
+          <rect x="519.4" y="91.1" width="22.5" height="90.9" fill="#15405f" rx="1.5"></rect>
+          <text x="65.4" y="197" text-anchor="middle" font-size="9.5" fill="#68758a">毛利</text>
+          <text x="104.2" y="197" text-anchor="middle" font-size="9.5" fill="#68758a">税金</text>
+          <text x="142.9" y="197" text-anchor="middle" font-size="9.5" fill="#68758a">销售费用</text>
+          <text x="181.7" y="197" text-anchor="middle" font-size="9.5" fill="#68758a">研发费用</text>
+          <text x="220.5" y="197" text-anchor="middle" font-size="9.5" fill="#68758a">管理费用</text>
+          <text x="259.2" y="197" text-anchor="middle" font-size="9.5" fill="#68758a">财务费用</text>
+          <text x="298" y="197" text-anchor="middle" font-size="9.5" fill="#68758a">资产减值</text>
+          <text x="336.8" y="197" text-anchor="middle" font-size="9.5" fill="#68758a">信用减值</text>
+          <text x="375.5" y="197" text-anchor="middle" font-size="9.5" fill="#68758a">公允</text>
+          <text x="414.3" y="197" text-anchor="middle" font-size="9.5" fill="#68758a">投资收益</text>
+          <text x="453.1" y="197" text-anchor="middle" font-size="9.5" fill="#68758a">处置</text>
+          <text x="491.8" y="197" text-anchor="middle" font-size="9.5" fill="#68758a">其他</text>
+          <text x="530.6" y="197" text-anchor="middle" font-size="9.5" fill="#68758a">营业利润</text>
+          <text x="65.3" y="28.0" text-anchor="middle" font-size="10" font-weight="700" fill="#1f5c8b">2,921</text>
+          <text x="530.6" y="85.1" text-anchor="middle" font-size="10" font-weight="700" fill="#15405f">1,795</text>
+        </g>
+      </svg>
+      <div class="legend">
+        <span><i style="background:#1f5c8b"></i>起点（毛利）</span>
+        <span><i style="background:#c98b8b"></i>减项</span>
+        <span><i style="background:#7aa87a"></i>加项</span>
+        <span><i style="background:#15405f"></i>结果（营业利润）</span>
+      </div>
+      <div class="src">数据来源：公司年报。勾稽关系：毛利 2,921 − 各项费用与减值 + 各项收益 = 营业利润 1,795（百万元）</div>
+    </div>
+    <div class="callout">
+      <div class="t">这一步的方法价值</div>
+      <p>
+        只看到"净利润下滑 50.8%"是信息；能说清"下滑来自环保板块的资产减值而非主业经营"才是判断。
+        <strong>归因的价值在于把"业绩变差"转化为"具体哪一块出了问题"。</strong>
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="no">5</span>结论与局限</h2>
+
+    <h3>核心结论</h3>
+    <ul>
+      <li>公司<strong>收入结构为三块，利润结构实为一块</strong>：收费公路以 54.7% 的收入贡献了 83.5% 的毛利；</li>
+      <li>环保业务自 2020 年达峰（占比 31.4%）后份额回落，但<strong>公司仍在新项目投产与资本开支上持续投入，处于"有收入、低毛利"的培育阶段</strong>——毛利率由 28.2% 降至 13.2%，2025H1 仍同比下滑；</li>
+      <li>公司利润的波动<strong>主要来自非主业因素</strong>（2024 年资产减值、投资收益变动；2025H1 财务费用下降），而非收费公路的经营表现；</li>
+      <li>因此判断公司盈利韧性的关键变量是<strong>收费公路的车流量与单次平均通行费</strong>，而不是环保业务的营收增速。</li>
+    </ul>
+
+    <h3>局限</h3>
+    <ul>
+      <li><strong>样本期间：</strong>历史数据覆盖 2016–2024，未包含更早的完整周期，对长期趋势的判断有限；</li>
+      <li><strong>口径依赖：</strong>板块拆分依赖公司披露口径，不同年度披露粒度不一致，跨年比较存在口径差异；</li>
+      <li><strong>预测性质：</strong>模型中的增长率与毛利率均为假设值，预测结果对假设敏感，未做多情景敏感性测试；</li>
+      <li><strong>单一标的：</strong>本拆解针对单家公司，结论不可直接外推到行业整体。</li>
+    </ul>
+
+    <h3>如果有条件继续推进</h3>
+    <ul>
+      <li><strong>多情景测算：</strong>对车流量增速与毛利率设置乐观 / 中性 / 悲观三档假设，输出利润区间而非单点预测；</li>
+      <li><strong>同业对比：</strong>将板块拆解方法应用到同行业其他公司，验证"收入结构 ≠ 利润结构"是否为行业普遍现象；</li>
+      <li><strong>敏感性排序：</strong>测算各假设变量对归母净利润的影响弹性，识别最需要跟踪的核心变量。</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="no">6</span>结论的后续验证</h2>
+    <p>
+      分析的价值不仅在于得出当时的结论，也在于这套框架能否被后续数据检验。
+      以下是 2025 年公开数据对本拆解结论的反馈（数据更新至 2025 年半年度报告）：
+    </p>
+
+    <div class="tbl-scroll">
+      <table>
+        <thead>
+          <tr><th>原结论</th><th>2025H1 观察</th><th>是否被验证</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>盈利韧性锚定收费公路，而非环保业务的增速</td>
+            <td>路费收入 24.49 亿元（同口径 +4.3%），仍是收入与利润的绝对主体</td>
+            <td class="num" style="color:#3f6b3f">已验证</td>
+          </tr>
+          <tr>
+            <td>环保业务占比在收入口径上收缩</td>
+            <td>大环保占比回升至 <b>19.1%</b>，重新超过其他业务（18.4%）</td>
+            <td class="num neg">部分修正</td>
+          </tr>
+          <tr>
+            <td>环保业务盈利能力偏弱且波动大</td>
+            <td>清洁能源毛利率 50.03%，同比 <b>-5.35pct</b>；整体毛利率 -1.4pct</td>
+            <td class="num" style="color:#3f6b3f">已验证</td>
+          </tr>
+          <tr>
+            <td>财务费用是利润的最大减项</td>
+            <td>财务费用 3.90 亿元，同比 <b>-30.3%</b>，成为净利润改善的主要来源</td>
+            <td class="num" style="color:#3f6b3f">已验证</td>
+          </tr>
+          <tr>
+            <td>利润受减值等非主业因素影响显著</td>
+            <td>归母净利润 9.60 亿元，同比 <b>+24.0%</b>，改善主要来自非主业因素</td>
+            <td class="num" style="color:#3f6b3f">已验证</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>这次验证带来的方法修正</h3>
+    <ul>
+      <li><strong>占比类指标需要结合公司行为一起看：</strong>大环保占比回落的同期，公司仍在新项目投产、并在资本开支计划中保留环保投入。只看占比会误判为"战略收缩"，加入公司行为后应修正为"<strong>仍处培育期</strong>"；</li>
+      <li><strong>半年度数据不能直接外推全年：</strong>2025H1 的占比受新增项目投产时点与业务季节性影响，需以全年数据复核；</li>
+      <li><strong>减值类科目应追溯至具体资产：</strong>2024 年环保板块减值与某笔收购标的未完成业绩承诺相关，说明"板块减值"背后往往是"单笔投资失误"，分析粒度需要继续下钻。</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>本页面为个人分析作品，用于展示业务结构拆解与分板块利润测算的方法。</p>
+    <p>页面已做匿名化处理，未包含任何个人或机构身份信息；数据均来自公开披露信息，含公司年报、半年度报告及公开报道。</p>
+    <p>核心结论已用 2025 年公开数据做后续验证，存在差异的部分已在第 6 部分说明。</p>
+  </footer>
+</div>
+</body>
+</html>

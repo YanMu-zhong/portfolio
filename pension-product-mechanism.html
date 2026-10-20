@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>个人养老金产品方案设计：匹配机制、风险与教育应对｜作品集</title>
+<style>
+  :root{
+    --ink:#1a2332; --ink-2:#4a5568; --ink-3:#7a8699;
+    --line:#e4e8ee; --bg:#fbfcfd; --card:#fff;
+    --accent:#1f5c8b; --accent-soft:#eef4f9;
+    --warn:#8a6d00; --warn-bg:#fdfaf0; --warn-line:#c9a227;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    font-size:16px; line-height:1.75;
+  }
+  .wrap{max-width:820px; margin:0 auto; padding:0 20px}
+  a{color:var(--accent)}
+  .back{display:inline-block; margin:18px 0 0; font-size:13.5px; color:var(--ink-3); text-decoration:none}
+  .back:hover{color:var(--accent)}
+
+  /* ---- 体系导航条 ---- */
+  .sysnav{background:#eef6fb; border:1px solid #cfe0ee; border-left:4px solid var(--accent); border-radius:0 10px 10px 0; padding:16px 20px; margin:24px 0 32px}
+  .sysnav-t{font-size:13.5px; font-weight:700; color:var(--accent); letter-spacing:.02em; margin-bottom:10px; padding-bottom:9px; border-bottom:1px dashed #cfe0ee}
+  .sysnav-b{font-size:15px; color:#2d3e50; line-height:1.75}
+  .sysnav-b p{margin:0 0 7px}
+  .sysnav-b p:last-child{margin-bottom:0}
+  .sysnav-link{font-size:14.5px; margin-top:11px; padding-top:10px; border-top:1px dashed #cfe0ee; color:#3b4d61}
+  .sysnav-b a{color:var(--accent); font-weight:700; text-decoration:none; border-bottom:1px solid #9dc0d8}
+  .sysnav-b a:hover{border-bottom-color:var(--accent)}
+
+  header{background:linear-gradient(160deg,#1f5c8b 0%,#15405f 100%); color:#fff; padding:44px 0 40px; margin-bottom:34px}
+  header .eyebrow{font-size:13px; letter-spacing:.16em; text-transform:uppercase; opacity:.75; margin-bottom:14px}
+  header h1{font-size:27px; line-height:1.35; margin:0 0 16px; font-weight:700}
+  header .lede{font-size:15.5px; line-height:1.8; color:#fff; opacity:.94; margin:0; max-width:660px}
+  .meta{margin-top:24px; display:flex; flex-wrap:wrap; gap:10px}
+  .meta span{font-size:13px; padding:5px 13px; border-radius:20px; background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.2)}
+
+  section{margin-bottom:40px}
+  h2{font-size:20px; font-weight:700; margin:0 0 18px; padding-bottom:10px; border-bottom:2px solid var(--accent); display:flex; align-items:baseline; gap:11px}
+  h2 .no{font-size:13px; font-weight:700; color:#fff; background:var(--accent); width:24px; height:24px; border-radius:6px; display:inline-flex; align-items:center; justify-content:center; flex:0 0 auto; transform:translateY(-1px)}
+  h3{font-size:16px; font-weight:700; margin:26px 0 10px}
+  p{margin:0 0 14px; color:var(--ink-2)}
+  strong{color:var(--ink); font-weight:700}
+
+  .stats{display:flex; flex-wrap:wrap; gap:12px; margin:20px 0}
+  .stat{flex:1 1 160px; background:var(--card); border:1px solid var(--line); border-left:3px solid var(--accent); border-radius:8px; padding:14px 16px}
+  .stat .v{font-size:21px; font-weight:700; color:var(--accent); line-height:1.3; letter-spacing:-.02em}
+  .stat .k{font-size:12.5px; color:var(--ink-3); margin-top:4px; line-height:1.5}
+
+  .tbl-scroll{overflow-x:auto; -webkit-overflow-scrolling:touch; margin:18px 0; border:1px solid var(--line); border-radius:10px; background:var(--card)}
+  table{border-collapse:collapse; width:100%; min-width:540px; font-size:14.5px}
+  th,td{padding:11px 14px; text-align:left; border-bottom:1px solid var(--line); vertical-align:top}
+  th{background:#f4f7fa; font-weight:700; font-size:13.5px; white-space:nowrap}
+  tr:last-child td{border-bottom:none}
+  td.num{font-variant-numeric:tabular-nums; white-space:nowrap; font-weight:700; color:var(--accent)}
+  .dim{color:var(--ink-3); font-size:13.5px}
+  .neg{color:#b03a3a; font-weight:700}
+
+  ul{margin:0 0 14px; padding-left:20px}
+  li{margin-bottom:9px; color:var(--ink-2)}
+
+  .rules{counter-reset:r; list-style:none; padding:0}
+  .rules li{counter-increment:r; position:relative; padding:12px 16px 12px 46px; margin-bottom:9px; background:var(--card); border:1px solid var(--line); border-radius:8px; color:var(--ink)}
+  .rules li::before{content:counter(r); position:absolute; left:14px; top:11px; width:22px; height:22px; border-radius:50%; background:var(--accent); color:#fff; font-size:12.5px; font-weight:700; display:flex; align-items:center; justify-content:center}
+
+  .callout{border-left:3px solid var(--warn-line); background:var(--warn-bg); padding:15px 18px; border-radius:0 8px 8px 0; margin:18px 0}
+  .callout .t{font-weight:700; color:var(--warn); font-size:14px; margin-bottom:6px}
+  .callout p{font-size:14.5px; margin-bottom:0; color:#5c4f22}
+  .callout p + p{margin-top:10px}
+
+  figure{margin:20px 0; background:var(--card); border:1px solid var(--line); border-radius:10px; padding:18px}
+  figure img{display:block; width:100%; height:auto; border-radius:6px; border:1px solid #eef1f5}
+  figcaption{font-size:12.5px; color:var(--ink-3); margin-top:12px; padding-top:11px; border-top:1px solid var(--line)}
+  figcaption b{color:var(--ink); font-size:13px; display:block; margin-bottom:3px}
+
+  .flow{margin:20px 0; background:var(--card); border:1px solid var(--line); border-radius:10px; padding:20px 22px}
+  .flow .st{display:flex; gap:12px; align-items:flex-start; padding:11px 0; border-bottom:1px dashed var(--line)}
+  .flow .st:last-child{border-bottom:none}
+  .flow .n{flex:0 0 24px; height:24px; border-radius:50%; background:var(--accent-soft); color:var(--accent); font-size:12.5px; font-weight:700; display:flex; align-items:center; justify-content:center}
+  .flow .bd{flex:1}
+  .flow .bd b{display:block; font-size:14.5px; margin-bottom:2px}
+  .flow .bd span{font-size:13.5px; color:var(--ink-2)}
+  .flow .bd em{font-style:normal; color:#b03a3a; font-weight:700}
+
+  footer{border-top:1px solid var(--line); margin-top:30px; padding:26px 0 50px; font-size:13.5px; color:var(--ink-3)}
+  footer p{margin:0 0 6px; font-size:13.5px; color:var(--ink-3)}
+
+  @media (max-width:600px){
+    body{font-size:15px}
+    header{padding:34px 0 30px}
+    header h1{font-size:22px}
+    h2{font-size:18px}
+    .stats .stat{flex:1 1 44%}
+    figure{padding:12px}
+    .sysnav{padding:14px 16px; margin:20px 0 26px}
+    .sysnav-t{font-size:13px}
+    .sysnav-b{font-size:14.5px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow">产品方案设计 · 体系上层</div>
+    <h1>个人养老金产品方案设计<span style="display:block;font-size:19px;font-weight:600;opacity:.88;margin-top:9px">匹配机制、风险与教育应对</span></h1>
+    <p class="lede">
+      个人养老金账户可投产品已达数百款，但用户的选择困难与信任不足并未因此缓解。
+      本方案从用户决策路径出发，设计一套「准入 → 分层推荐 → 阶段性审查 → 退出」的完整匹配机制，
+      并给出多方协同下的职责划分。
+    </p>
+    <div class="meta">
+      <span>用户决策路径分析</span>
+      <span>机制与流程设计</span>
+      <span>多方职责划分</span>
+      <span>2024.11 – 2024.12</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="sysnav">
+    <div class="sysnav-t">所属体系　个人养老金产品 — 方案设计与规则体系</div>
+    <div class="sysnav-b">
+      <p>本页是体系的<strong>上层</strong>，回答"为什么扩这一类资产、用户怎么被服务、会有什么副作用"。</p>
+      <p>规则条文与阈值不在本页，在下层定义，避免两份文档口径打架。</p>
+      <div class="sysnav-link">↳ 体系下层：<a href="etf-screening.html">《准入规则与阈值定义》</a></div>
+    </div>
+  </div>
+
+  <section style="margin-top:26px">
+    <h2><span class="no">1</span>问题定义：卡点不在产品数量，而在匹配</h2>
+    <p>
+      个人养老金制度落地后，可投产品数量持续增长。从供给端看相当丰富，但从用户端看，
+      几个数据同时指向同一个问题：
+    </p>
+
+    <div class="stats">
+      <div class="stat"><div class="v">809 款</div><div class="k">个人养老金产品数量（截至 2024-10-28）</div></div>
+      <div class="stat"><div class="v">68.7%</div><div class="k">储蓄类产品在总规模中的占比</div></div>
+      <div class="stat"><div class="v">7.756%</div><div class="k">规模前十养老基金中 ETF 净值占比均值</div></div>
+      <div class="stat"><div class="v">-5% ~ 5%</div><div class="k">个人养老基金收益率的主要波动区间</div></div>
+    </div>
+
+    <p>
+      把这几组数字连起来看：<strong>产品不缺（809 款），但规模高度集中在用户最容易理解的储蓄类（68.7%）</strong>；
+      基金类产品中真正被使用的工具占比极低（ETF 持仓 7.756%）；而一旦涉及净值型产品，
+      收益体验又大幅波动（-5%~5%，甚至出现 -20% 的异常值）。
+    </p>
+
+    <div class="callout">
+      <div class="t">我在这个问题上的判断</div>
+      <p>
+        如果需求端的核心矛盾是"<strong>不知道在几百款产品里怎么选、以及选完之后不放心</strong>"，
+        那么单纯增加供给品类（比如把 ETF 纳入可投范围）<strong>不但不能解决问题，反而会加剧选择负担</strong>。
+      </p>
+      <p>
+        因此正确的介入点不是"再上架一类产品"，而是<strong>建立一套帮用户完成匹配的机制</strong>——
+        先用明确标准把不合格产品挡在外面，再按用户风险偏好分层推荐，最后通过阶段性审查保证名单不劣化。
+        <strong>本方案设计的正是这套机制。</strong>
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="no">2</span>方案选型：为什么是 ETF</h2>
+    <p>
+      明确了"卡点在匹配"之后，还需要回答一个前置问题：<strong>要扩充的是哪一类资产？</strong>
+      本方案选择 ETF，不是因为它是热门品种，而是因为它的产品特性与养老资金的长期属性逐条对应。
+    </p>
+
+    <h3>2.1 为什么需要扩充品类：现有方案的三个错配</h3>
+    <div class="tbl-scroll">
+      <table>
+        <thead>
+          <tr><th>现有方案的错配</th><th>具体表现</th><th>对养老资金的影响</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>配置结构错配</strong></td>
+            <td>账户资产高度集中于储蓄类（占规模 <b>68.7%</b>）；近十年三年期定存利率与通胀率不相上下</td>
+            <td>部分时期面临负实际利率，<strong>账户资金购买力逐年缩水</strong>，难以实现保值增值</td>
+          </tr>
+          <tr>
+            <td><strong>成本结构错配</strong></td>
+            <td>现有基金类以 FOF 为主，存在子、母基金<b>双重收费</b></td>
+            <td>费用直接侵蚀净收益，<strong>持有期越长侵蚀越明显</strong>，与长期持有目标冲突</td>
+          </tr>
+          <tr>
+            <td><strong>产品同质化</strong></td>
+            <td>养老基金产品同质化严重，可选品种有限</td>
+            <td>无法满足不同风险偏好投资者的差异化需求，<strong>降低账户吸引力</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>2.2 ETF 的六项特性与养老资金需求的对应关系</h3>
+    <p>把 ETF 的产品特性与养老资金的要求逐条对照，可以看到它们几乎是同向的：</p>
+    <ol class="rules">
+      <li><strong>指数化投资 → 免去个股选择负担：</strong>A 股上市公司已超 4000 家，个人投资者难以充分调研；
+          ETF 跟踪指数，天然实现分散化，与养老金追求稳健而非博取个股收益的目标一致</li>
+      <li><strong>被动管理 → 降低委托代理风险：</strong>FOF 作为主动型产品，业绩受基金经理风格、能力与职业操守影响，
+          易出现"风格漂移""频繁交易"；ETF 跟踪特定指数，基本不受基金经理个人因素影响，
+          投资者无需承担对管理人的判断风险</li>
+      <li><strong>费率结构简单 → 减少收益侵蚀：</strong>ETF 采用被动策略，无需频繁调仓，且不存在 FOF 的双重收费，
+          直接降低长期持有成本</li>
+      <li><strong>持仓透明 + 披露及时 → 建立信任：</strong>ETF 每日公布持仓与净值，重大事件两个工作日内公告，
+          投资者能明确资金流向、减少对净值波动的疑虑</li>
+      <li><strong>资产覆盖广 → 支持差异化配置：</strong>覆盖股票、债券、商品等多类资产，
+          既可配宽基，也可按自身判断配置行业与跨境品种，扩充账户的可投范围</li>
+      <li><strong>长期收益属性 → 匹配保值增值目标：</strong>长期看主动策略较难持续超越指数，
+          而储蓄类资产长期难以跑赢通胀；指数化投资是兼顾两者的工具</li>
+    </ol>
+
+    <h3>2.3 国际经验参考</h3>
+    <p>
+      美国是最早推行个人养老金入市、也是最早将 ETF 作为个人养老金投资资产池的国家。
+      其第三支柱 IRA 的主要配置方向为共同基金：通过分散风险、平滑波动，<strong>既保证了养老金的稳健性，
+      又让账户享受到股市上涨的红利</strong>。
+    </p>
+    <p>
+      更值得注意的是它的外溢效应：由于养老金投资期限长，长线资金入市后
+      <strong>带动了机构投资者占比上升，市场波动率下降、估值中枢稳定上移</strong>——
+      这意味着养老资金的引入不仅改善了个人账户的收益，也改变了市场的投资者结构。
+    </p>
+    <p>
+      我国三支柱体系在制度设计上参考了美国经验，因此 <strong>ETF 进入个人养老金投资范围
+      是可预期的制度演进方向</strong>；本方案要解决的是：在这个方向确定的前提下，
+      <strong>进入的门槛与机制应当如何设定</strong>。
+    </p>
+  </section>
+
+  <section>
+    <h2><span class="no">3</span>用户决策路径拆解</h2>
+    <p>从用户打开个人养老金账户，到完成一笔配置，需要跨过四个环节。每一环都有明确的流失风险：</p>
+
+    <div class="flow">
+      <div class="st">
+        <div class="n">1</div>
+        <div class="bd"><b>进入产品目录</b><span>面对数百款产品，缺乏可比较的统一维度，第一反应是"太多了"。<em>风险：无从下手，直接退出</em></span></div>
+      </div>
+      <div class="st">
+        <div class="n">2</div>
+        <div class="bd"><b>建立选择标准</b><span>用户缺少判断产品的专业框架，只能依赖最直观的信号——"哪个看起来最稳"。<em>风险：只能选自己看得懂的，导致储蓄类过度集中</em></span></div>
+      </div>
+      <div class="st">
+        <div class="n">3</div>
+        <div class="bd"><b>做出选择并持有</b><span>选完之后缺少持续反馈，净值波动时无法判断"是正常波动还是选错了"。<em>风险：短期波动引发焦虑，破坏长期持有</em></span></div>
+      </div>
+      <div class="st">
+        <div class="n">4</div>
+        <div class="bd"><b>决定是否继续</b><span>如果体验不佳，会停止缴存或只用最低额度。<em>风险：养老储备目标未达成</em></span></div>
+      </div>
+    </div>
+
+    <p>
+      <strong>四个环节对应三种机制需求</strong>：第 1、2 环需要<strong>准入筛选与分层推荐</strong>（降低选择成本）；
+      第 3 环需要<strong>阶段性审查与信息披露</strong>（持续建立信任）；
+      第 4 环需要<strong>退出与替换机制</strong>（保证长期体验不劣化）。
+    </p>
+  </section>
+
+  <section>
+    <h2><span class="no">4</span>机制设计</h2>
+    <p>
+      机制分三层，分别解决"选什么""推荐给谁""什么时候该退出"。
+    </p>
+    <div class="callout">
+      <div class="t">本页与下层文档的分工（避免重复定义）</div>
+      <p>
+        本页只定义<strong>每层要解决什么问题、以及关键的设计取舍</strong>；
+        <strong>具体的判定规则与阈值（9 项指标及数值、优先级细则、退出触发条件）全部放在下层文档</strong>，
+        此处引用而不复述——规则只保留一个出处，避免两份文档出现口径差异。
+      </p>
+    </div>
+
+    <h3>4.1 准入层：先解决"怎么判定合格"</h3>
+    <p>
+      准入层要回答的问题是：<strong>面对上千支候选产品，用什么标准判定"合格"？</strong>
+      本层的输出是一份可解释、可复现的达标名单。
+    </p>
+    <p>
+      规则本体——规模、流动性、收益、风险、跟踪能力 5 个维度共 9 项指标及其具体阈值——
+      定义在下层文档
+      <a href="etf-screening.html"><strong>《准入规则与阈值定义》</strong></a>，
+      该文档同时给出阈值推导过程与数据口径。
+    </p>
+    <div class="callout">
+      <div class="t">这一层的核心设计取舍：为什么不做加权综合评分</div>
+      <p>
+        准入门槛有两种做法：给 9 项指标各配权重算综合分，或用分位数阈值逐项判定。
+        本方案选择后者，因为对面向普通投资者的产品而言，有两个因素比排序精度更重要：
+        <strong>一是权重的正当性</strong>——任何权重方案都可能被质疑"凭什么这么配"；
+        <strong>二是结论的可解释性</strong>——逐项判定能让每一个被排除的产品都说清"因为哪一项不达标"，
+        而综合评分只能给出一个总分，无法向用户解释。
+      </p>
+    </div>
+
+    <h3>4.2 推荐层：解决"通过之后怎么呈现给不同的人"</h3>
+    <p>
+      通过准入层的产品数量仍然可能超出用户的决策能力，因此需要一个排序与分层规则，
+      决定<strong>先呈现什么、后呈现什么</strong>。本层的输出是一套与用户风险偏好匹配的呈现顺序。
+    </p>
+    <p>
+      结合第三支柱落地初期投资者倾向于低风险产品的特征，呈现顺序按四条优先级依次收敛
+      （具体规则见<a href="etf-screening.html">下层文档</a>）。这套顺序对应一个明确的产品意图：
+      <strong>让用户在信息最少、判断力最弱的时候，看到的也是相对更稳妥的选项</strong>，
+      而不是把全部产品平铺给他自己挑。
+    </p>
+
+    <h3>4.3 生命周期层：解决"名单怎么不随时间劣化"</h3>
+    <p>
+      前两层都只解决"进来"的问题。如果缺少退出机制，随着时间推移名单会持续积累表现下滑的产品，
+      用户的信任也随之流失——这是<strong>产品池类机制最容易失效的地方</strong>。
+    </p>
+    <p>
+      本层的输出是一组明确的退出触发条件与长期考核期，使产品池成为可迭代的机制而非一次性名单
+      （触发条件见<a href="etf-screening.html">下层文档</a>）。
+      关于"不合格产品如何处理"，见第 4 部分的流程图——其中包含一条从审查退回产品设计的回流路径，
+      这是保证机制长期有效的关键环节。
+    </p>
+  </section>
+
+  <section>
+    <h2><span class="no">5</span>流程与多方职责设计</h2>
+    <p>
+      上述机制要落地，需要监管方、金融机构、账户服务机构与结算体系协同。以下三张流程图为机制的分工与流转设计：
+    </p>
+
+    <figure>
+      <img src="assets/mechanism-stakeholders.jpg" alt="纳入ETF过程中所涉主体的组织结构">
+      <figcaption>
+        <b>参与主体与职责结构</b>
+        以个人养老金投资者为中心，向上连接监管方（人社部、财政部、证监会）、金融机构（基金公司、证券公司、结算机构、银行）与其他机构（第三方研究机构、媒体与公众），并区分场内监管与场外监管两条责任路径。
+      </figcaption>
+    </figure>
+
+    <figure>
+      <img src="assets/mechanism-onboarding.jpg" alt="纳入ETF产品前的准备工作流程">
+      <figcaption>
+        <b>准入流程：从政策到产品池</b>
+        监管方出台专项法规与税收政策 → 监管方设置基础标准并筛选公司资质 → 基金公司依标准设计产品 → 账户服务机构审核评估 → 合格则纳入产品池，不合格退回重新设计。流程中包含明确的<strong>决策分支</strong>与退回路径。
+      </figcaption>
+    </figure>
+
+    <figure>
+      <img src="assets/mechanism-lifecycle.jpg" alt="纳入ETF产品后的调整工作流程">
+      <figcaption>
+        <b>运营与退出流程：产品池如何保持不劣化</b>
+        进入产品池后进入阶段性审查：表现合格则进入推荐机制；不合格则判定是否退出——退出则更新席位、重新走纳入审核；未达退出条件则退回基金公司优化再设计。同时向用户同步账户盈亏与产品表现信息，强化认知。
+      </figcaption>
+    </figure>
+
+    <div class="callout">
+      <div class="t">这套流程里我认为最关键的一环</div>
+      <p>
+        是"<strong>不合格 → 退回优化再设计 → 重新走准入审核</strong>"这条回流路径。
+        它把"产品池"从一次性的静态名单变成了<strong>带淘汰与迭代的活机制</strong>——
+        有回流路径，名单才不会随时间劣化；<strong>缺少这条路径，任何准入标准都会在几年内失效。</strong>
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="no">6</span>方案的副作用与风险应对</h2>
+    <p>
+      任何方案都会带来新的问题。ETF 被引入养老金账户后，有两个副作用是可以预见的，
+      而且它们都源于 ETF 自身的优点——这也是设计时必须一并处理的原因。
+    </p>
+
+    <h3>6.1 风险一：交易便利性可能诱发短期波段操作</h3>
+    <div class="callout">
+      <div class="t">风险成因</div>
+      <p>
+        ETF 具备 <strong>T+0 / T+1 的交易效率</strong>，二级市场交易费用低廉、不收取印花税、
+        分红与差价收入免征所得税——这些特性<strong>共同放大了波段操作的相对收益</strong>。
+        账户一旦可以直接交易 ETF，部分投资者很可能把它当作短期择时工具，
+        <strong>这与养老金资金"长期持有"的属性直接冲突</strong>。
+      </p>
+      <p>
+        值得强调的是：这个风险<strong>不是产品缺陷，而是产品优点被误用</strong>。
+        因此不能用"取消交易便利性"来应对，只能通过机制与教育加以引导。
+      </p>
+    </div>
+
+    <h3>6.2 风险二：与税收优惠机制叠加后可能偏离养老目标</h3>
+    <div class="callout">
+      <div class="t">风险成因</div>
+      <p>
+        个人养老金享有税收减免优惠，这本身是吸引缴存的制度设计。但当"节税"与"ETF 的交易便利性"
+        叠加时，投资者可能<strong>同时追求节税收益与短期价差</strong>，为了放大收益而承担超出自身承受能力的风险，
+        从而忽略养老投资的核心目标——长期稳健增值与养老保障，<strong>形成保障性与收益性的倒置</strong>。
+      </p>
+    </div>
+
+    <h3>6.3 应对思路：三层引导机制</h3>
+    <div class="tbl-scroll">
+      <table>
+        <thead>
+          <tr><th>层级</th><th>应对措施</th><th>对应解决的问题</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>规则层</strong></td>
+            <td>优先纳入波动适中、流动性高的宽基类产品，并设置<strong>风险等级匹配机制</strong>；
+                在准入与推荐环节就用规则把高波动品种挡在优先位置之外</td>
+            <td>从源头上降低账户持仓的波动暴露</td>
+          </tr>
+          <tr>
+            <td><strong>披露层</strong></td>
+            <td>强化风险披露：明确标注"<strong>历史业绩不代表未来收益</strong>"，
+                完整说明指数产品的波动性与跟踪误差等风险特征</td>
+            <td>修正投资者的收益预期，减少因预期错配引发的频繁交易</td>
+          </tr>
+          <tr>
+            <td><strong>教育层</strong></td>
+            <td>普及指数基金基础知识、重点宣导<strong>长期投资理念与定投策略</strong>，
+                并提供模拟投资与投顾服务（见 5.4）</td>
+            <td>提升自主决策能力，降低因认知不足导致的跟风与短线操作</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>6.4 投资者教育：面向谁的、教什么、怎么落地</h3>
+    <p>
+      投资者教育不是泛泛的宣传，而是需要明确受众、内容与形式的产品动作：
+    </p>
+    <ul>
+      <li><strong>受众：</strong>对个人养老金投资有兴趣、但缺少指数基金经验的群体——
+          包括年轻缴存人、中等收入群体，以及对养老规划有明确需求的用户；</li>
+      <li><strong>内容：</strong>指数基金的基本概念，及其<strong>长期稳健、成本低、风险分散</strong>等特性；
+          并讲清 ETF 与个人养老金投资的适配性，而非只讲产品收益；</li>
+      <li><strong>形式：</strong>从"讲知识"走向"给体验"——开展<strong>模拟投资</strong>让用户在虚拟环境中走完流程，
+          用<strong>真实案例分析</strong>呈现投资过程中的风险与机会，并提供<strong>投顾服务</strong>帮助制定个性化配置方案；</li>
+      <li><strong>工具：</strong>借助智能化投顾工具提供个性化配置建议，<strong>降低自主决策门槛</strong>——
+          这一点与本方案"减少选择成本"的核心目标一致。</li>
+    </ul>
+    <div class="callout">
+      <div class="t">这一节与机制设计的关系</div>
+      <p>
+        机制解决的是"产品池里有什么、按什么顺序呈现"，教育解决的是"用户能不能理解并做出合适的选择"。
+        <strong>两者缺一不可</strong>：只做机制，用户仍可能因认知不足而误用产品；
+        只做教育，用户仍要面对数百款产品的选择负担。
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="no">7</span>关键假设与验证方案</h2>
+    <p>
+      本方案是基于公开数据与机制推演的<strong>设计稿</strong>，其中的用户侧判断尚未经过实测。
+      要让方案可落地，以下假设必须优先验证：
+    </p>
+    <div class="tbl-scroll">
+      <table>
+        <thead>
+          <tr><th>待验证假设</th><th>验证方式</th><th>优先级</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>用户的核心困难是"不会选"，而非"不想投"</td>
+            <td>对已开户未持续缴存用户做访谈，区分"不知道选什么"与"不认可制度"<span class="dim">（5–8 人深访）</span></td>
+            <td class="num">高</td>
+          </tr>
+          <tr>
+            <td>提供筛选后的短名单能提升配置完成率</td>
+            <td>对同一批用户做 A/B 测试：全量列表 vs 筛选后短名单，对比配置完成率</td>
+            <td class="num">高</td>
+          </tr>
+          <tr>
+            <td>按风险偏好分层推荐优于按收益排序推荐</td>
+            <td>两组推荐策略对比：选择耗时、配置后 30 日留存、是否发生频繁调整</td>
+            <td class="num">中</td>
+          </tr>
+          <tr>
+            <td>短名单的长度存在最优区间</td>
+            <td>测试 10 / 20 / 50 款不同长度下的选择行为差异</td>
+            <td class="num">中</td>
+          </tr>
+          <tr>
+            <td>阶段性审查结果的主动披露能提升信任</td>
+            <td>对比披露与不披露两组用户的次年续缴率</td>
+            <td class="num">中</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="no">8</span>这个方案的边界</h2>
+    <p>需要明确说明本方案"是什么"与"不是什么"，避免把研究方案误读为已落地的产品：</p>
+    <ul>
+      <li><strong>这是机制设计方案，不是产品设计交付物：</strong>尚无用户访谈、问卷、原型与可用性测试，
+          用户决策路径部分是基于公开数据的<strong>推演</strong>，而非实测；</li>
+      <li><strong>准入门槛是相对标准：</strong>阈值由当期市场分布的分位数确定，市场整体下移时阈值会同步下移，
+          不代表绝对最优；</li>
+      <li><strong>未涉及合规与技术可行性评估：</strong>方案涉及监管政策、跨机构系统对接与资金封闭划转，
+          实际落地需相关方参与评估，本文不构成对可行性的判断；</li>
+      <li><strong>下一步该补什么：</strong>按第 5 部分的验证顺序，先做用户访谈确认问题定义，
+          再用原型验证机制是否真的降低选择成本。</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>本页面为个人分析作品，用于展示用户决策路径拆解与机制设计方法。</p>
+    <p>页面已做匿名化处理，未包含任何个人或机构身份信息；数据均来自公开披露信息。</p>
+    <p>文中流程图为本人绘制，机制部分为设计稿，用户侧判断已在第 5、6 部分标注为待验证。</p>
+  </footer>
+</div>
+</body>
+</html>
